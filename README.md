@@ -24,13 +24,13 @@
 |-------------------|--------|-------------------------------|
 |user_id            |integer |null: false, foreign_key: true |
 |name               |string  |null: false                    |
-|price              |string  |null: false                    |
-|description        |string  |null: false                    |
+|price              |integer |null: false                    |
+|description        |text    |null: false                    |
 |category           |string  |null: false                    |
-|status             |string  |null: false                    |
-|shipping_charges   |string  |null: false                    |
-|shipping_area      |string  |null: false                    |
-|shipping_days      |string  |null: false                    |
+|status             |integer |null: false                    |
+|shipping_charges   |integer |null: false                    |
+|shipping_area      |integer |null: false                    |
+|shipping_days      |integer |null: false                    |
 
 ### Association
 
@@ -47,21 +47,21 @@
 ### Association
 
 * belongs_to :user
-* has_one :order
+* belongs_to :item
 * has_one :address
 
 ## addresses table
 
 |Column             |Type    |Options                        |
 |-------------------|--------|-------------------------------|
-|user_id            |integer |null: false, foreign_key: true |
-|postal_code        |integer |null: false                    |
-|prefecture         |string  |null: false                    |
+|order_id           |integer |null: false, foreign_key: true |
+|postal_code        |string  |null: false                    |
+|prefecture         |integer  |null: false                    |
 |city               |string  |null: false                    |
 |address            |string  |null: false                    |
-|building_name      |string  |null: false                    |
+|building_name      |string  |                    |
 |phone_number       |string  |null: false                    |
 
 ### Association
 
-* has_one :order
+* belongs_to :order
