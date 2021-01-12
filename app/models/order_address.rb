@@ -5,12 +5,12 @@ class OrderAddress
   with_options presence: true do
     validates :user_id
     validates :item_id
-    validates :postal_code
-    validates :shipping_area_id
+    validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-).' }
+    validates :shipping_area_id, numericality: { other_than: 1 }
     validates :city
     validates :address
-    validates :building_name
-    validates :phone_number
+    validates :phone_number, numericality: { only_integer: true, message: 'is invalid. Input only half-width numbers.' },
+    length: { maximum: 11 }
   end
   
   def save
