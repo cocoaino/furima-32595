@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
   before_action :set_item
   before_action :authenticate_user!
   before_action :contributor_confirmation
-  before_action :sold_out_item, only: [:index]
 
   def index
     @order_address = OrderAddress.new
@@ -41,10 +40,6 @@ class OrdersController < ApplicationController
   end
 
   def contributor_confirmation
-    redirect_to root_path if current_user == @item.user
-  end
-
-  def sold_out_item
-    redirect_to root_path if @item.order.present?
+    redirect_to root_path if current_user == @item.user || @item.order.present?
   end
 end

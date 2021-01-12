@@ -28,6 +28,11 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Postal code can't be blank")
       end
+      it 'postal_codeが７文字ではない場合購入できない' do
+        @order_address.postal_code = '123456'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-).')
+      end
       it 'postal_codeにハイフンが含まれないと購入できない' do
         @order_address.postal_code = '1234567'
         @order_address.valid?
